@@ -24,7 +24,6 @@ async function main() {
         const result = await getWorks();
         // stockage des données dans la variable worksData
         const worksData = result.works;
-        console.log(worksData);
         // Incrémenteur d'index pour se situer dans forEach
         let index = -1;
         // Initiliasateur du tableau comprenant nos catégories
@@ -36,7 +35,6 @@ async function main() {
             index++;
             categoryArray.push(worksData[index].category.name);
         })
-
         //Initialisation des catégories
         getCategory(categoryArray);
         //Initialisation de l'affichage des données
@@ -45,7 +43,6 @@ async function main() {
         console.error('Erreur lors de la récupération des données :', error);
     }
 }
-
 
 // Fonction pour supprimer les duplicatas des catégories
 function getCategory(arg){
@@ -82,7 +79,6 @@ function categoriesDisplay(arg) {
      // Ajouter une fonction pour chacune des catégories générées (addEventListener)
      categoriesHTML.forEach(function(arg){
             let category = arg.value;
-            console.log(category);
             let splittedCategory = category.split(' ');
             let filters = document.querySelectorAll('.filters')
             let worksData = parsedWorksData[0];
@@ -121,11 +117,7 @@ function categoriesDisplay(arg) {
             }
      })
 }
-
-// console.log(devReact);
-
-// const filteredVideos = videos.filter(video => user.genres.some(gen => gen.name === video.name))
-// Affichage des données globales (filtrées, ou non)
+// fonction d'affichage 
 function displayData(arg){
     let data = arg;
     let index = -1;
@@ -153,8 +145,6 @@ function displayData(arg){
     }
     )
 }
-
-
 
 // Initialisation du script
 main();
