@@ -1,6 +1,7 @@
 // Récupérateur d'élements html
 const filtersHTML = document.getElementById('filters'); //selection de l'ID filter html
 const galleryHTML = document.querySelector('.gallery');
+const parsedWorksData = [];
 
 
 //fetch partie 2.// 
@@ -14,21 +15,26 @@ async function getWorks() {
     })
 }
 
+
 // Fetch partie 1.
+// Début du script
 async function main() {
     try {
         // Récupération donnée API de Fetch partie 2.
         const result = await getWorks();
         // stockage des données dans la variable worksData
         const worksData = result.works;
+        console.log(worksData);
         // Incrémenteur d'index pour se situer dans forEach
         let index = -1;
         // Initiliasateur du tableau comprenant nos catégories
         let categoryArray = []
+        // push de worksData dans parsedWorksData
+        parsedWorksData.push(worksData);
         // Pour chacune des données, on push leur "category.name" dans categoryArray
         worksData.forEach(function(){
             index++;
-            categoryArray.push(worksData[index].category.name)
+            categoryArray.push(worksData[index].category.name);
         })
 
         //Initialisation des catégories
@@ -39,6 +45,8 @@ async function main() {
         console.error('Erreur lors de la récupération des données :', error);
     }
 }
+
+
 // Fonction pour supprimer les duplicatas des catégories
 function getCategory(arg){
     //Permet de supprimer tous les duplicatas
@@ -59,13 +67,13 @@ function categoriesDisplay(arg) {
         // Exemple : "Hotel et Restaurant" deviendra splittedCategory[0] = "Hotel" ,splittedCategory[1] = " ", splittedCategory[2] = "et",  splittedCategory[3] = " ", splittedCategory[4] = "restaurant".
         let splittedCategory = categories[index].split(' ')
         // Création des éléments html (bouttons)
-        let categoryHTML = `<input type='button' class="filters" id="${splittedCategory[0]}">${categories[index]}</input>`
+        let categoryHTML = `<input type='button' class="filters" id="${splittedCategory[0]}" value="${categories[index]}"></input>`
         // Incrémentation des boutons à notre element id="filters"
         filtersHTML.innerHTML += categoryHTML;
         }
      )
      // Création du bouton "tous"
-     let categoryAll = `<input type='button' class="filters" id="sortAll">Tous</input>`
+     let categoryAll = `<input type='button' class="filters" id="sortAll" value="tous"></input>`
      // Incrémentation du bouton "tous"
      filtersHTML.innerHTML += categoryAll; 
      // Récupération des boutons possédant la classe "filters", généré dynamiquement précédémment
@@ -73,21 +81,50 @@ function categoriesDisplay(arg) {
      let i = -1;
      // Ajouter une fonction pour chacune des catégories générées (addEventListener)
      categoriesHTML.forEach(function(arg){
-            i++
-            console.log(arg);
-            let category = arg[i];
+            let category = arg.value;
+            console.log(category);
+            let splittedCategory = category.split(' ');
             let filters = document.querySelectorAll('.filters')
-            /*switch (category) {
-                case 'objets" : 
-                //;
-                case 'appartements': 
-                //;
-                case 'hotel' : 
-                //;
-            }*/
+            let worksData = parsedWorksData[0];
+            switch (splittedCategory[0]) {
+                case 'Objets' : 
+                    arg.addEventListener("click",function(){
+                        let filteredData = worksData.filter(data => data.category.name.includes("Objets"))
+                        displayData(filteredData);
+                })
+                break;
+                ;
+                case 'Appartements':
+                    arg.addEventListener("click",function(){
+                        let filteredData = worksData.filter(data => data.category.name.includes("Appartements"))
+                        displayData(filteredData);
+                })
+                break;
+                ;
+                case 'Hotels' :
+                    arg.addEventListener("click",function(){
+                        let filteredData = worksData.filter(data => data.category.name.includes("Hotels & restaurants"))
+                        displayData(filteredData);
+                })
+                break;
+                ;
+                case 'tous' : 
+                    arg.addEventListener("click",function(){
+                        displayData(worksData);
+                    })
+                break;
+                ;
+                default : 
+                displayData(worksData);
+                break;
+                ;
+            }
      })
 }
 
+// console.log(devReact);
+
+// const filteredVideos = videos.filter(video => user.genres.some(gen => gen.name === video.name))
 // Affichage des données globales (filtrées, ou non)
 function displayData(arg){
     let data = arg;
@@ -95,19 +132,28 @@ function displayData(arg){
     // Réinitialisation des données dans la class html gallery
     galleryHTML.innerHTML = ""
     // Pour chaque donnée de worksData
-    data.forEach(function(){
-        index++
+    data.forEach(function(entry, index){
         // Génération du HTML
-        let entryHtml = 
-            `<article class="entries">
-                <div class="entries_bkg">
-                    <img src="${data[index].imageUrl}" alt="${data[index].title}"/>
-                </div>
-            </article>`
-        galleryHTML.innerHTML += entryHtml;
-        }
+        let article = document.createElement('article');
+        let div = document.createElement('div');
+        let img = document.createElement('img');
+        let h3 = document.createElement('h3');
+
+        article.classList.add('entries');
+        div.classList.add('entries_bkg');
+
+        img.src = entry.imageUrl;
+        img.alt = entry.title;
+        h3.innerHTML = entry.title;
+
+        div.appendChild(img);
+        div.appendChild(h3);
+        article.appendChild(div);
+        galleryHTML.appendChild(article);
+    }
     )
 }
+
 
 
 // Initialisation du script
