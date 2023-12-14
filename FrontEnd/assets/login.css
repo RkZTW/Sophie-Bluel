@@ -1,0 +1,171 @@
+html {
+  background-color: #FFFEF8;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/** end reset css**/
+body {
+  max-width: 1140px;
+  margin: auto;
+  font-family: "Work Sans";
+  font-size: 14px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0px 150px 0px;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  font-family: "Syne";
+  font-size: 22px;
+  font-weight: 800;
+  color: #B1663C;
+}
+
+h1 > span {
+  font-family: "Work Sans";
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+nav li {
+  padding: 0 10px;
+  font-size: 1.2em;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: black;
+}
+
+li:hover, a:hover {
+  color: #B1663C;
+}
+
+.login__nav {
+  font-weight: 600;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.login h2 {
+  font-family: Syne;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #1D6154;
+  margin-bottom: 37px;
+}
+.login label {
+  width: 100%;
+  display: flex;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 7px;
+}
+.login input {
+  width: 90%;
+  height: 51px;
+  margin-bottom: 30px;
+  padding-block: 0px;
+  padding-inline: 10px;
+}
+.login #connect {
+  width: 179px;
+  height: 36px;
+  border-radius: 60px;
+  background-color: #1D6154;
+  color: white;
+  font-family: Syne;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  cursor: pointer;
+}
+.login p {
+  width: 139px;
+  height: 16px;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #3D3D3D;
+  border-bottom: #3D3D3D solid 1px;
+}
+
+/*# sourceMappingURL=login.css.map */
