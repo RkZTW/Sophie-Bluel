@@ -153,7 +153,11 @@ li:hover, a:hover {
   line-height: 17px;
   letter-spacing: 0em;
   text-align: center;
+  margin-bottom: 0px;
   cursor: pointer;
+}
+.login a {
+  height: 36px;
 }
 .login p {
   width: 139px;
@@ -166,6 +170,8 @@ li:hover, a:hover {
   text-align: left;
   color: #3D3D3D;
   border-bottom: #3D3D3D solid 1px;
+  margin-top: 30px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=login.css.map */

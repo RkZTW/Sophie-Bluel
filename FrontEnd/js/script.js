@@ -43,7 +43,7 @@ async function main() {
 }
 
 // Fonction pour supprimer les duplicatas des catégories
-function getCategory(arg) {
+function getCategory (arg) {
     //Permet de supprimer tous les duplicatas
     const categories = [...new Set(arg)] // set = enssemble de catégorie "unique" (pas de duplicata)
     // On envoie le resultats à la fonction d'initialisation de l'affichage des catégories
@@ -80,99 +80,99 @@ function categoriesDisplay(arg) {
         // Incrémentation des boutons à notre element id="filters"
         filtersHTML.appendChild(categoryHTML);
     });
-// Retirer la classe "active" de tous les boutons avant d'ajouter l'écouteur d'événements
-document.querySelectorAll('.filters').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-        // Retirer la classe "active" de tous les boutons
-        document.querySelectorAll('.filters').forEach(function (btn) {
-            btn.classList.remove('active');
-        });
-
-        // Ajouter la classe "active" au bouton actuel
-        btn.classList.add('active');
-
-        // Récupération des boutons possédant la classe "filters", généré dynamiquement précédemment
-        let categoriesHTML = document.querySelectorAll('.filters');
-        let worksData = parsedWorksData[0];
-        let filteredData; // Déclarer filteredData à l'extérieur
-
-        switch (btn.id) {
-            case 'Objets':
-                filteredData = worksData.filter(data => data.category.name.includes("Objets"))
-                displayData(filteredData);
-                break;
-            case 'Appartements':
-                filteredData = worksData.filter(data => data.category.name.includes("Appartements"))
-                displayData(filteredData);
-                break;
-            case 'Hotels':
-                filteredData = worksData.filter(data => data.category.name.includes("Hotels & restaurants"))
-                displayData(filteredData);
-                break;
-            case 'Tous':
-                displayData(worksData);
-                break;
-            default:
-                displayData(worksData);
-                break;
-        }
-    });
-});
-        // fonction d'affichage HTML
-        function displayData(arg) {
-            let data = arg;
-            let index = -1;
-            // Réinitialisation des données dans la class html gallery
-            galleryHTML.innerHTML = ""
-            // Pour chaque donnée de worksData
-            data.forEach(function (entry, index) {
-                // Génération du HTML
-                let article = document.createElement('article');
-                let div = document.createElement('div');
-                let img = document.createElement('img');
-                let h3 = document.createElement('h3');
-
-                article.classList.add('entries');
-                div.classList.add('entries_bkg');
-
-                img.src = entry.imageUrl;
-                img.alt = entry.title;
-                h3.innerHTML = entry.title;
-
-                div.appendChild(img);
-                div.appendChild(h3);
-                article.appendChild(div);
-                galleryHTML.appendChild(article);
-            }
-            )
-        }
-    }
-    // Fonction pour ajouter la classe "active" au filtre cliqué
-    function addActiveClassToFilters() {
-        var filters = document.querySelectorAll('.filters');
-        filters.forEach(function (filter) {
-            filter.addEventListener('click', function () {
-                console.log('Filter clicked!'); // Vérifiez si le clic est détecté
-
-                // Supprimer la classe "active" de tous les filtres
-                filters.forEach(function (otherFilter) {
-                    otherFilter.classList.remove('active');
-                });
-
-                // Ajouter ou supprimer la classe "active" au filtre actuel
-                filter.classList.toggle('active');
-
-                // Appeler la fonction pour afficher l'élément actuellement actif
-                active(filter);
+    // Retirer la classe "active" de tous les boutons avant d'ajouter l'écouteur d'événements
+    document.querySelectorAll('.filters').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            // Retirer la classe "active" de tous les boutons
+            document.querySelectorAll('.filters').forEach(function (btn) {
+                btn.classList.remove('active');
             });
+
+            // Ajouter la classe "active" au bouton actuel
+            btn.classList.add('active');
+
+            // Récupération des boutons possédant la classe "filters", généré dynamiquement précédemment
+            let categoriesHTML = document.querySelectorAll('.filters');
+            let worksData = parsedWorksData[0];
+            let filteredData; // Déclarer filteredData à l'extérieur
+
+            switch (btn.id) {
+                case 'Objets':
+                    filteredData = worksData.filter(data => data.category.name.includes("Objets"))
+                    displayData(filteredData);
+                    break;
+                case 'Appartements':
+                    filteredData = worksData.filter(data => data.category.name.includes("Appartements"))
+                    displayData(filteredData);
+                    break;
+                case 'Hotels':
+                    filteredData = worksData.filter(data => data.category.name.includes("Hotels & restaurants"))
+                    displayData(filteredData);
+                    break;
+                case 'Tous':
+                    displayData(worksData);
+                    break;
+                default:
+                    displayData(worksData);
+                    break;
+            }
         });
-    }
+    });
+    // fonction d'affichage HTML
+    function displayData(arg) {
+        let data = arg;
+        let index = -1;
+        // Réinitialisation des données dans la class html gallery
+        galleryHTML.innerHTML = ""
+        // Pour chaque donnée de worksData
+        data.forEach(function (entry, index) {
+            // Génération du HTML
+            let article = document.createElement('article');
+            let div = document.createElement('div');
+            let img = document.createElement('img');
+            let h3 = document.createElement('h3');
 
-    // Fonction pour afficher l'élément actuellement actif
-    function active(element) {
-        console.log(element);
-    }
+            article.classList.add('entries');
+            div.classList.add('entries_bkg');
 
-    // Initialisation du script
-    main();
-    addActiveClassToFilters();
+            img.src = entry.imageUrl;
+            img.alt = entry.title;
+            h3.innerHTML = entry.title;
+
+            div.appendChild(img);
+            div.appendChild(h3);
+            article.appendChild(div);
+            galleryHTML.appendChild(article);
+        }
+        )
+    }
+}
+// Fonction pour ajouter la classe "active" au filtre cliqué
+function addActiveClassToFilters() {
+    var filters = document.querySelectorAll('.filters');
+    filters.forEach(function (filter) {
+        filter.addEventListener('click', function () {
+            console.log('Filter clicked!'); // Vérifiez si le clic est détecté
+
+            // Supprimer la classe "active" de tous les filtres
+            filters.forEach(function (otherFilter) {
+                otherFilter.classList.remove('active');
+            });
+
+            // Ajouter ou supprimer la classe "active" au filtre actuel
+            filter.classList.toggle('active');
+
+            // Appeler la fonction pour afficher l'élément actuellement actif
+            active(filter);
+        });
+    });
+}
+
+// Fonction pour afficher l'élément actuellement actif
+function active(element) {
+    console.log(element);
+}
+
+// Initialisation du script
+main();
+addActiveClassToFilters();
