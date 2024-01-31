@@ -13,6 +13,9 @@
 	display: block;
 }
 
+.option{
+	display: none;
+}
 .modal__pages {
 	width: 630px;
 	height: 688px;
@@ -22,6 +25,7 @@
 	background: #FFFFFF;
 	position: absolute;
 	z-index: 9998;
+	cursor: pointer;
 }
 .modal__title {
 	font-family: Work Sans;
@@ -110,4 +114,164 @@
 
 /*---------------------modal page 2---------------------*/
 
+.fa-arrow-left{
+	width: 21px;
+	height: 21px;
+    top: 46px;
+    left: 28px;
+	position: absolute;
+	cursor: pointer;
+}
 
+.modal__pages .input__default{
+ cursor: no-drop;
+ background-color: #A7A7A7;
+}
+
+.modal__pages .input__green{
+	cursor: pointer;
+	background-color: #1d6154;
+}
+
+/*---------------------modal upload---------------------*/
+.modul__upload{
+	width: 420px;
+	height: 169px;
+	top: 142px;
+    left: 104px;
+	border-radius: 3px;
+	background-color: #E8F1F6;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+	position: absolute;
+}
+
+.icon__upload {
+	width: 76px;
+    height: 76px;
+	color: #a6a6a6;
+	font-size: 4.5em;
+	text-align: center;
+	margin-top: 13px;
+}
+
+.modal__gallery .input__upload{
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: center;
+	margin: 0px;
+	display: inline-block;
+}
+
+.button-wrapper {
+	position: relative;
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	text-align: center;
+	
+  }
+  
+  .button-wrapper span.label {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	width: 100%;
+	border-radius: 50px;
+	background-color: #CBD6DC;	
+	color: #306685;
+	cursor: pointer;
+	padding: 10px 0;
+	text-transform: uppercase;
+	font-size: 12px;
+  }
+  
+  #fileInput {
+	display: none; /* Masquer l'input file par défaut */
+  }
+  
+  #fileInput + span.label::before {
+	content: '+ Ajouter photo'; /* Afficher le texte du label avant l'input file */
+	text-transform: none; /* Ne pas appliquer la transformation de casse sur le texte */
+  }
+  
+#upload {
+	  display: inline-block;
+	  position: absolute;
+	  z-index: 1;
+	  width: 100%;
+	  height: 50px;
+	  top: 0;
+	  left: 0;
+	  opacity: 0;
+	  cursor: pointer;
+  }
+
+.txt__upload{
+	width: 94px;
+	height: 12px;
+	font-family: Work Sans;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+	letter-spacing: 0em;
+	text-align: center;
+	color: #444444;
+	margin-top: 7px;
+	margin-bottom: 19px;
+}
+
+/*---------------------modal Titre---------------------*/
+
+.title__upload, .categorie__title{
+	width: 32px;
+	height: 16px;
+	top: 985px;
+	left: 510px;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #3D3D3D;
+	margin-top: 190px;
+}
+
+.modal__gallery .input__title, .modal__gallery .select__categories{
+	width: 420px;
+	height: 51px;
+	top: 1011px;
+	left: 510px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	border-radius: 0px;
+    display: block;
+    margin-top: 0px;
+	border: 0px;
+}
+.categorie__title{
+	margin-top: 0px;
+	width: 65px;
+	height: 16px;
+}
+
+.image-preview {
+	object-fit:contain;
+	width: 100%; 
+	height: 100%;
+	display: block;
+  }
+
+  .image-preview-off{
+	display:none;
+  }

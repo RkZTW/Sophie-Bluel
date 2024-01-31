@@ -1,4 +1,4 @@
-import { displayModal } from './shared.js';
+import { displayGalleryModal } from './shared.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     // Vérifie si l'utilisateur est connecté
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Affiche le contenu approprié en fonction de la connexion de l'utilisateur
     if (isLoggedIn) {
-        displayModal();
+        displayGalleryModal();
     }
-
+    
 });
