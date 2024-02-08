@@ -75,14 +75,15 @@
 }
 /*---------------------modal page 1---------------------*/
 .modal__gallery{
-	height: 366px;
-	width: 420px;
-	margin: 0px 105px;
-	display: flex;
+    height: 366px;
+    width: 420px;
+    margin: 0px 105px;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 8.9px;
 }
 
 .modal__gallery--img {

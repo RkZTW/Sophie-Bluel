@@ -216,7 +216,7 @@ export function addActiveClassToFilters() {
 }
 
 /*------------------------------------------- Modal -------------------------------------------*/
-import { displayGalleryModal, createGalleryModal, displayUploadModal } from './modal.js';
+import { displayGalleryModal, displayUploadModal } from './modal.js';
 
 // Nouvelle fonction pour mettre à jour la galerie après l'ajout ou la suppression d'une image
 export async function updateGallery() {

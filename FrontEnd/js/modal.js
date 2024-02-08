@@ -133,14 +133,7 @@ export function createGalleryModal() {
     });
 }
 
-
-
-
-
-
 /*------------------------------------------- Modal 2 -------------------------------------------*/
-
-
 
 export function createUploadModal() {
     const modal = document.querySelector('.modal');
@@ -205,6 +198,7 @@ export function createUploadModal() {
 let selectedCategoryId;
 export function displayUploadModal(data, categories) {
     createUploadModal();
+
     const container = document.querySelector('.modal__gallery');
     let imageFile;
 
@@ -334,9 +328,9 @@ export function displayUploadModal(data, categories) {
     const inputGlobal = document.getElementById('uploadGlobal');
     inputGlobal.addEventListener('click', function () {
         sendDataToAPI(inputTitleUpload.value, selectedCategoryId, imageFile);
+        openModal();
     });
 }
-
 
 function selectCategoryDropdown(categoryList) {
     const selectCategoriesUpload = document.createElement('select');
@@ -388,6 +382,7 @@ function filterCategoryId(selectedCategory) {
             return -1; // Valeur par défaut si la catégorie n'est pas reconnue
     }
 }
+import { updateGallery } from './shared.js';
 async function sendDataToAPI(title, categoryId, imageFile) {
     const apiUrl = 'http://localhost:5678/api/works';
     const formData = new FormData();
@@ -410,6 +405,8 @@ async function sendDataToAPI(title, categoryId, imageFile) {
             const fileName = result.fileName;
             const imageURL = `http://localhost:5678/images/${fileName}`;
 
+            updateGallery();
+            
             return imageURL;
         } else {
             const errorText = await response.text();
@@ -419,6 +416,7 @@ async function sendDataToAPI(title, categoryId, imageFile) {
         console.error('Erreur lors de l\'envoi des données à l\'API:', error);
     }
 }
+
 async function deleteWork(id) {
     try {
         const authToken = localStorage.getItem('accessToken');
@@ -431,8 +429,9 @@ async function deleteWork(id) {
         });
 
         if (response.ok) {
-            // Actualise la galerie après la suppression
+
             updateGallery();
+
         } else {
             console.error('Échec de la suppression de l\'œuvre');
         }
