@@ -327,8 +327,20 @@ export function displayUploadModal(data, categories) {
 
     const inputGlobal = document.getElementById('uploadGlobal');
     inputGlobal.addEventListener('click', function () {
+        // Vérifie si une catégorie a été sélectionnée
+        if (!selectedCategoryId || selectedCategoryId === '') {
+            alert('Veuillez sélectionner une catégorie.');
+            return;
+        }
+    
+        // Vérifie si un titre a été saisi
+        if (!inputTitleUpload.value.trim()) {
+            alert('Veuillez saisir un titre.');
+            return;
+        }
+    
+        // Envoie les données à l'API
         sendDataToAPI(inputTitleUpload.value, selectedCategoryId, imageFile);
-        openModal();
     });
 }
 
@@ -363,7 +375,6 @@ function selectCategoryDropdown(categoryList) {
         // Mise à jour de la variable globale selectedCategoryId
         selectedCategoryId = categoryId;
     });
-
     return selectCategoriesUpload;
 }
 
