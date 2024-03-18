@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function () {
+/*document.addEventListener('DOMContentLoaded', async function () {
     // Vérifie si l'utilisateur est connecté
     const isLoggedIn = window.isLoggedIn || false;
 
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         displayGalleryModal();
     }
 
-});
+});*/
 
 /*------------------------------------------- Modal 1 -------------------------------------------*/
 
@@ -27,9 +27,10 @@ export function displayGalleryModal(arg) {
         // Supprime l'image du conteneur gallery (trash icon)
         const trashIcon = document.createElement('i');
         trashIcon.classList.add('fa-solid', 'fa-trash-can', 'fa-xs', 'modal__gallery--trash');
-        trashIcon.addEventListener('click', function () {
+        trashIcon.addEventListener('click', async function (event) {
+            event.preventDefault();
             //fonction deleteWork avec l'identifiant 
-            deleteWork(entry.id);
+            await deleteWork(entry.id);
         });
 
         imgContainer.appendChild(img);
@@ -37,9 +38,11 @@ export function displayGalleryModal(arg) {
         container.appendChild(imgContainer);
     });
 }
+
 import { parsedWorksData } from './shared.js';
 import { filteredData } from './shared.js';
 import { categories } from './shared.js';
+
 // Récupére l'élément modal par sa classe
 export function createGalleryModal() {
     const modal = document.querySelector('.modal');
@@ -127,8 +130,7 @@ export function createGalleryModal() {
     });
 
     // Bouton pour ajouter une photo = affichage modal 2
-
-    inputModal.addEventListener('click', (event) => {
+    inputModal.addEventListener('click', () => {
         displayUploadModal(filteredData, categories);
     });
 }
@@ -162,13 +164,6 @@ export function createUploadModal() {
         const lineModal = document.createElement('div');
         lineModal.classList.add('line');
 
-        // Ajoute le bouton de validation à l'élément container
-        const inputGlobal = document.createElement('input');
-        inputGlobal.type = 'submit';
-        inputGlobal.value = 'Valider';
-        inputGlobal.classList.add('input__default');
-        inputGlobal.id = 'uploadGlobal';
-
         // Ajoute les éléments à l'élément modal
         modal.appendChild(sectionModal);
         sectionModal.appendChild(iconBack);
@@ -176,7 +171,6 @@ export function createUploadModal() {
         sectionModal.appendChild(titleModal);
         sectionModal.appendChild(container);
         sectionModal.appendChild(lineModal);
-        sectionModal.appendChild(inputGlobal);
 
     } else {
         console.error("class 'modal' do not exists.");
@@ -201,6 +195,9 @@ export function displayUploadModal(data, categories) {
 
     const container = document.querySelector('.modal__gallery');
     let imageFile;
+
+    const formContainer = document.createElement ('form');
+    formContainer.id = 'formContainer'
 
     const modulUpload = document.createElement('div');
     modulUpload.classList.add('modul__upload');
@@ -241,18 +238,30 @@ export function displayUploadModal(data, categories) {
     titleCategorieUpload.innerHTML = "Catégorie";
     titleCategorieUpload.classList.add('categorie__title');
 
+    // Ajoute le bouton de validation à l'élément container
+    const inputGlobal = document.createElement('input');
+    inputGlobal.type = 'submit';
+    inputGlobal.value = 'Valider';
+    inputGlobal.classList.add('input__default');
+    inputGlobal.id = 'uploadGlobal';
+    
+
     const selectCategoriesUpload = selectCategoryDropdown(categories);
 
-    container.appendChild(modulUpload);
+    formContainer.appendChild(modulUpload);
     modulUpload.appendChild(iconUpload);
     buttonWrapper.appendChild(fileInput);
     buttonWrapper.appendChild(labelSpan);
     modulUpload.appendChild(buttonWrapper);
     modulUpload.appendChild(txtUpload);
-    container.appendChild(titleUpload);
-    container.appendChild(inputTitleUpload);
-    container.appendChild(titleCategorieUpload);
-    container.appendChild(selectCategoriesUpload);
+    formContainer.appendChild(titleUpload);
+    formContainer.appendChild(inputTitleUpload);
+    formContainer.appendChild(titleCategorieUpload);
+    formContainer.appendChild(selectCategoriesUpload);
+    formContainer.appendChild(inputGlobal);
+    container.appendChild(formContainer);
+    console.log(formContainer);
+    
 
     const imagePreview = document.createElement('img');
     imagePreview.classList.add('image-preview-off');
@@ -313,7 +322,7 @@ export function displayUploadModal(data, categories) {
 
         imagePreview.src = URL.createObjectURL(blobImage);
 
-        // Supprime les éléments inutiles
+        // Supprime les éléments inutiles (image en prévisualisation)
         if (modulUpload.contains(iconUpload)) {
             modulUpload.removeChild(iconUpload);
         }
@@ -325,8 +334,8 @@ export function displayUploadModal(data, categories) {
         }
     };
 
-    const inputGlobal = document.getElementById('uploadGlobal');
-    inputGlobal.addEventListener('click', function () {
+    formContainer.addEventListener('submit', function (event) {
+        event.preventDefault ();
         // Vérifie si une catégorie a été sélectionnée
         if (!selectedCategoryId || selectedCategoryId === '') {
             alert('Veuillez sélectionner une catégorie.');
@@ -393,7 +402,7 @@ function filterCategoryId(selectedCategory) {
             return -1; // Valeur par défaut si la catégorie n'est pas reconnue
     }
 }
-import { updateGallery } from './shared.js';
+//import { updateGallery } from './shared.js';
 async function sendDataToAPI(title, categoryId, imageFile) {
     const apiUrl = 'http://localhost:5678/api/works';
     const formData = new FormData();
@@ -416,7 +425,7 @@ async function sendDataToAPI(title, categoryId, imageFile) {
             const fileName = result.fileName;
             const imageURL = `http://localhost:5678/images/${fileName}`;
 
-            updateGallery();
+            //updateGallery();
             
             return imageURL;
         } else {
@@ -441,7 +450,7 @@ async function deleteWork(id) {
 
         if (response.ok) {
 
-            updateGallery();
+            //updateGallery();
 
         } else {
             console.error('Échec de la suppression de l\'œuvre');
